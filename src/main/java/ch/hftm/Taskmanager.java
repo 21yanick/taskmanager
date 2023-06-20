@@ -10,9 +10,16 @@ public class Taskmanager {
         this.tasks = new ArrayList<>();
     }
 
-    public void createTask(String aufgabe, String beschreibung, Priority priority, String datum, Status status) {
+    public Task createTask(String aufgabe, String beschreibung, Priority priority, String datum, Status status) {
         Task task = new Task(aufgabe, beschreibung, priority, datum, status);
         tasks.add(task);
+        System.out.println("Aufgabe erstellt: " + task.getAufgabe()); // Debug-Ausgabe
+        return task;
+    }
+
+    public List<Task> getTasks() {
+        System.out.println("Anzahl der Aufgaben: " + tasks.size()); // Debug-Ausgabe
+        return tasks;
     }
 
     public void printTasks() {
@@ -21,37 +28,10 @@ public class Taskmanager {
         }
     }
 
-    public List<Task> filterAufgabenNachStatus(Status status) {
-        List<Task> gefilterteAufgabenStatus = new ArrayList<>();
-        for (Task aufgabe : tasks) {
-            if (aufgabe.getStatus() == status) {
-                gefilterteAufgabenStatus.add(aufgabe);
-            }
-        }
-        return gefilterteAufgabenStatus;
-    }
-
-    public List<Task> filterAufgabenNachPrioritaet(Priority prioritaet) {
-        List<Task> gefilterteAufgabenPrio = new ArrayList<>();
-        for (Task aufgabe : tasks) {
-            if (aufgabe.getPriority() == prioritaet) {
-                gefilterteAufgabenPrio.add(aufgabe);
-            }
-        }
-        return gefilterteAufgabenPrio;
-    }
-
-    public void sortiereAufgabenNachDatum() {
-        int n = tasks.size();
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                if (tasks.get(j).getDatum().compareTo(tasks.get(j + 1).getDatum()) > 0) {
-                    // Tausche tasks[j+1] und tasks[j]
-                    Task temp = tasks.get(j);
-                    tasks.set(j, tasks.get(j + 1));
-                    tasks.set(j + 1, temp);
-                }
-            }
+    public void updateTask(Task oldTask, Task newTask) {
+        int index = tasks.indexOf(oldTask);
+        if (index != -1) {
+            tasks.set(index, newTask);
         }
     }
 

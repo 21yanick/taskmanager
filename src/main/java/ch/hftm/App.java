@@ -1,38 +1,35 @@
 package ch.hftm;
 
-import java.util.List;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class App {
+import java.io.IOException;
+
+public class App extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        try {
+            Taskmanager taskmanager = new Taskmanager();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/task_overview.fxml"));
+            TaskOverviewController controller = new TaskOverviewController(taskmanager);
+            loader.setController(controller);
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Aufgabenmanager");
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
-        Taskmanager taskManager = new Taskmanager();
-        taskManager.createTask("Task 1", "Beschreibung 1", Priority.HIGH, "13.06.2023", Status.OFFEN);
-        taskManager.createTask("Task 2", "Beschreibung 2", Priority.NORMAL, "13.06.2023", Status.ERLEDIGT);
-        taskManager.createTask("Task 3", "Beschreibung 3", Priority.LOW, "14.06.2023", Status.OFFEN);
-        taskManager.createTask("Task 4", "Beschreibung 4", Priority.HIGH, "15.06.2023", Status.ON_HOLD);
-
-        System.out.println("Alle Aufgaben:");
-        taskManager.printTasks();
-
-        System.out.println("\nAufgaben filtern nach Status OFFEN:");
-        List<Task> gefilterteAufgabenStatus = taskManager.filterAufgabenNachStatus(Status.OFFEN);
-        for (Task task : gefilterteAufgabenStatus) {
-            System.out.println(task);
-        }
-
-        System.out.println("\nAufgaben filtern nach Priorität HIGH:");
-        List<Task> gefilterteAufgabenPrio = taskManager.filterAufgabenNachPrioritaet(Priority.HIGH);
-        for (Task task : gefilterteAufgabenPrio) {
-            System.out.println(task);
-        }
-
-        System.out.println("\nAufgabe suchen:");
-        List<Task> gefundeneAufgaben = taskManager.sucheAufgaben("Task 1");
-        if (!gefundeneAufgaben.isEmpty()) {
-            for (Task task : gefundeneAufgaben) {
-                System.out.println(task);
-            }
-        } else {
-            System.out.println("Keine Aufgaben gefunden.");
-        }
+        launch(args);
     }
 }
