@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class TaskEditController {
 
@@ -23,6 +24,8 @@ public class TaskEditController {
     private Button speichernButton;
     @FXML
     private Button abbrechenButton;
+    @FXML
+    private Button löschenButton;
 
     private Taskmanager taskmanager;
     private Task task;
@@ -42,20 +45,18 @@ public class TaskEditController {
 
         speichernButton.setOnAction(event -> saveTask());
         abbrechenButton.setOnAction(event -> cancel());
+        löschenButton.setOnAction(event -> deleteTask());
     }
 
     public void setTask(Task task) {
         this.task = task;
         if (task != null) {
-            // Wenn eine Aufgabe übergeben wird, füllen Sie die Felder mit den vorhandenen
-            // Daten der Aufgabe
             aufgabenFeld.setText(task.getAufgabe());
             beschreibungFeld.setText(task.getBeschreibung());
-            datumFeld.setValue(LocalDate.parse(task.getDatum()));
+            datumFeld.setValue((task.getDatum()));
             priorityFeld.setValue(task.getPriority());
             statusFeld.setValue(task.getStatus());
         } else {
-            // Wenn keine Aufgabe übergeben wird, leeren Sie die Felder
             aufgabenFeld.setText("");
             beschreibungFeld.setText("");
             datumFeld.setValue(null);
@@ -68,30 +69,41 @@ public class TaskEditController {
     public void saveTask() {
         String aufgabe = aufgabenFeld.getText();
         String beschreibung = beschreibungFeld.getText();
-        String datum = datumFeld.getValue().toString();
+        LocalDate datum = datumFeld.getValue();
         Priority priority = priorityFeld.getValue();
         Status status = statusFeld.getValue();
 
         if (task == null) {
-            // Wenn keine Aufgabe gesetzt wurde, erstellen Sie eine neue Aufgabe
             Task newTask = taskmanager.createTask(aufgabe, beschreibung, priority, datum, status);
         } else {
-            // Wenn eine Aufgabe gesetzt wurde, erstellen Sie eine neue Aufgabe mit den
-            // aktualisierten Daten
             Task updatedTask = new Task(aufgabe, beschreibung, priority, datum, status);
-            // Aktualisieren Sie die Aufgabe in der Liste
             taskmanager.updateTask(task, updatedTask);
         }
 
-        // Schließe das Fenster nach dem Speichern der Aufgabe
         Stage stage = (Stage) speichernButton.getScene().getWindow();
         stage.close();
     }
 
     private void cancel() {
-        // Schließt das Fenster ohne Änderungen zu speichern
         Stage stage = (Stage) abbrechenButton.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    public void deleteTask() {
+        if (task != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Aufgabe löschen");
+            alert.setHeaderText("Bist du sicher, dass du die Aufgabe löschen möchtest?");
+            alert.setContentText("Dies kann nicht rückgängig gemacht werden.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                taskmanager.deleteTask(task);
+                Stage stage = (Stage) löschenButton.getScene().getWindow();
+                stage.close();
+            }
+        }
     }
 
 }

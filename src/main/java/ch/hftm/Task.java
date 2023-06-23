@@ -1,14 +1,16 @@
 package ch.hftm;
 
+import java.time.LocalDate;
+
 public class Task {
     private String aufgabe;
     private String beschreibung;
     private Priority priority;
-    private String datum;
+    private LocalDate datum;
     private Status status;
 
     
-    public Task(String aufgabe, String beschreibung, Priority priority, String datum, Status status) {
+    public Task(String aufgabe, String beschreibung, Priority priority, LocalDate datum, Status status) {
         this.aufgabe = aufgabe;
         this.beschreibung = beschreibung;
         this.priority = priority;
@@ -17,7 +19,6 @@ public class Task {
     }
 
     
-    // Getter und Setter Methoden
     public String getAufgabe() {
         return aufgabe;
     }
@@ -42,11 +43,11 @@ public class Task {
         this.priority = priority;
     }
 
-    public String getDatum() {
+    public LocalDate getDatum() {
         return datum;
     }
 
-    public void setDatum(String datum) {
+    public void setDatum(LocalDate datum) {
         this.datum = datum;
     }
 

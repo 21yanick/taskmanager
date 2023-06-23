@@ -1,6 +1,7 @@
 package ch.hftm;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -52,7 +53,9 @@ public class TaskOverviewController {
                 .setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBeschreibung()));
         priorityColumn.setCellValueFactory(
                 cellData -> new SimpleStringProperty(cellData.getValue().getPriority().toString()));
-        dueDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDatum()));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        dueDateColumn.setCellValueFactory(
+                cellData -> new SimpleStringProperty(cellData.getValue().getDatum().format(formatter)));
         statusColumn
                 .setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus().toString()));
 
@@ -86,7 +89,11 @@ public class TaskOverviewController {
             showTaskEditDialog(selectedTask);
         } else {
             // Zeigen Sie eine Nachricht an, wenn keine Aufgabe ausgewählt wurde
-            System.out.println("Keine Aufgabe ausgewählt.");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText(null);
+            alert.setContentText("Keine Aufgabe ausgewählt.");
+            alert.showAndWait();
         }
     }
 
