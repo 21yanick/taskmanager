@@ -9,81 +9,85 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane prefHeight="349.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.0" minWidth="10.0" prefWidth="203.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="197.0" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="341.0" minHeight="10.0" prefHeight="109.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="121.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
        <Label fx:id="aufgabe" prefWidth="56.0" text="Aufgabe">
          <GridPane.margin>
-            <Insets bottom="80.0" left="10.0" />
+            <Insets bottom="80.0" left="20.0" />
          </GridPane.margin>
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font>
       </Label>
-       <TextField fx:id="aufgabenFeld">
+       <TextField fx:id="aufgabenFeld" prefHeight="20.0" prefWidth="150.0">
          <GridPane.margin>
-            <Insets left="10.0" right="40.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" />
          </GridPane.margin>
       </TextField>
        <Label fx:id="beschreibung" text="Beschreibung" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets bottom="80.0" left="10.0" />
+            <Insets bottom="60.0" left="20.0" />
          </GridPane.margin>
       </Label>
-       <TextField fx:id="beschreibungFeld" GridPane.rowIndex="1">
+       <TextField fx:id="beschreibungFeld" prefHeight="20.0" prefWidth="150.0" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets left="10.0" right="40.0" />
+            <Insets left="20.0" right="20.0" />
          </GridPane.margin>
       </TextField>
-       <Label fx:id="erstelldatum" text="Datum" GridPane.rowIndex="2">
+       <Label fx:id="erstelldatum" text="Datum" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets bottom="80.0" left="10.0" />
+            <Insets bottom="60.0" left="40.0" right="40.0" />
          </GridPane.margin>
       </Label>
-       <DatePicker fx:id="datumFeld" GridPane.rowIndex="2">
+       <DatePicker fx:id="datumFeld" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets left="10.0" right="40.0" />
+            <Insets left="40.0" right="40.0" />
          </GridPane.margin>
       </DatePicker>
        <Label fx:id="status" text="Status" GridPane.columnIndex="1">
          <GridPane.margin>
-            <Insets bottom="80.0" left="10.0" />
+            <Insets bottom="80.0" left="40.0" right="40.0" />
          </GridPane.margin>
       </Label>
-       <ChoiceBox fx:id="priorityFeld" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+       <ChoiceBox fx:id="priorityFeld" prefWidth="150.0" style="-fx-background-radius: 10;" GridPane.columnIndex="1">
          <GridPane.margin>
-            <Insets left="10.0" right="40.0" />
+            <Insets bottom="-55.0" left="40.0" right="40.0" />
          </GridPane.margin>
       </ChoiceBox>
-       <Label fx:id="priority" text="Priority" GridPane.columnIndex="1" GridPane.rowIndex="1">
+       <Label fx:id="priority" text="Priority" GridPane.columnIndex="1">
          <GridPane.margin>
-            <Insets bottom="80.0" left="10.0" />
+            <Insets bottom="-15.0" left="40.0" right="40.0" />
          </GridPane.margin>
       </Label>
-      <ChoiceBox fx:id="statusFeld" prefWidth="150.0" GridPane.columnIndex="1">
+      <ChoiceBox fx:id="statusFeld" prefWidth="150.0" style="-fx-background-radius: 10;" GridPane.columnIndex="1">
          <GridPane.margin>
-            <Insets left="10.0" right="40.0" />
+            <Insets bottom="40.0" left="40.0" right="40.0" />
          </GridPane.margin>
       </ChoiceBox>
-       <Button fx:id="speichernButton" onAction="#saveTask" prefHeight="30.0" prefWidth="150.0" text="Speichern" GridPane.columnIndex="1" GridPane.rowIndex="2">
+       <Button fx:id="speichernButton" onAction="#saveTask" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 10;" text="Speichern" GridPane.rowIndex="2">
          <GridPane.margin>
-            <Insets bottom="90.0" left="10.0" right="40.0" />
+            <Insets bottom="50.0" left="20.0" right="20.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="abbrechenButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Abbrechen" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <Button fx:id="abbrechenButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-radius: 10;" text="Abbrechen" GridPane.rowIndex="2">
          <GridPane.margin>
-            <Insets bottom="60.0" left="10.0" right="40.0" top="40.0" />
+            <Insets left="20.0" right="20.0" top="40.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="löschenButton" mnemonicParsing="false" onAction="#deleteTask" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #FF0000; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; -fx-border-color: black;" text="Löschen" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <Button fx:id="löschenButton" mnemonicParsing="false" onAction="#deleteTask" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #FF0000; -fx-text-fill: #FFFFFF; -fx-font-weight: bold; -fx-background-radius: 10;" styleClass="lösch" text="Löschen" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
-            <Insets bottom="10.0" left="10.0" right="40.0" top="70.0" />
+            <Insets left="20.0" right="20.0" top="40.0" />
          </GridPane.margin>
       </Button>
    </children>
