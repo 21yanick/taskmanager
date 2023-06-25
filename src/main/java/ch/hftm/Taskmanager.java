@@ -16,20 +16,13 @@ public class Taskmanager {
     public Task createTask(String aufgabe, String beschreibung, Priority priority, LocalDate datum, Status status, Project project) {
         Task task = new Task(aufgabe, beschreibung, priority, datum, status, project);
         tasks.add(task);
-        System.out.println("Aufgabe erstellt: " + task.getAufgabe()); // Debug-Ausgabe
         return task;
     }
 
     public List<Task> getTasks() {
-        System.out.println("Anzahl der Aufgaben: " + tasks.size()); // Debug-Ausgabe
         return tasks;
     }
 
-    public void printTasks() {
-        for (Task task : tasks) {
-            System.out.println(task);
-        }
-    }
 
     public void updateTask(Task oldTask, Task newTask) {
         int index = tasks.indexOf(oldTask);
