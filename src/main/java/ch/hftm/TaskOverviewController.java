@@ -35,6 +35,8 @@ public class TaskOverviewController {
     private Button AufgabeBearbeitenButton;
     @FXML
     private TextField SuchenFeld;
+    @FXML
+    private TableColumn<Task, String> projectColumn;
 
     private Taskmanager taskmanager;
 
@@ -58,6 +60,8 @@ public class TaskOverviewController {
                 cellData -> new SimpleStringProperty(cellData.getValue().getDatum().format(formatter)));
         statusColumn
                 .setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus().toString()));
+        projectColumn
+                .setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProject().toString()));
 
         taskTable.setItems(FXCollections.observableArrayList(taskmanager.getTasks()));
 
@@ -88,7 +92,6 @@ public class TaskOverviewController {
         if (selectedTask != null) {
             showTaskEditDialog(selectedTask);
         } else {
-            // Zeigen Sie eine Nachricht an, wenn keine Aufgabe ausgewählt wurde
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information");
             alert.setHeaderText(null);
@@ -112,7 +115,6 @@ public class TaskOverviewController {
             stage.setScene(new Scene(root));
             stage.showAndWait();
 
-            // Nachdem das Fenster geschlossen wurde, aktualisieren Sie die TableView
             taskTable.getItems().setAll(taskmanager.getTasks());
         } catch (IOException e) {
             e.printStackTrace();

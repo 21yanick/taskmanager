@@ -14,11 +14,12 @@
 <VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <TableView fx:id="taskTable" prefHeight="442.0" prefWidth="600.0">
         <columns>
-            <TableColumn fx:id="titleColumn" prefWidth="250.0" text="Aufgabe" />
-            <TableColumn fx:id="descriptionColumn" prefWidth="750.0" text="Beschreibung" />
-            <TableColumn fx:id="priorityColumn" prefWidth="60.0" text="Priority" />
-            <TableColumn fx:id="dueDateColumn" text="Datum" />
-            <TableColumn fx:id="statusColumn" prefWidth="60.0" text="Status" />
+            <TableColumn fx:id="titleColumn" prefWidth="220.0" text="Aufgabe" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="480.0" text="Beschreibung" />
+            <TableColumn fx:id="priorityColumn" prefWidth="120.0" text="Priority" />
+            <TableColumn fx:id="dueDateColumn" prefWidth="110.0" text="Datum" />
+            <TableColumn fx:id="statusColumn" prefWidth="110.0" text="Status" />
+         <TableColumn fx:id="projectColumn" prefWidth="160.0" text="Projekt" />
         </columns>
     </TableView>
    <GridPane>

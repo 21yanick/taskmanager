@@ -6,13 +6,15 @@ import java.util.List;
 
 public class Taskmanager {
     private List<Task> tasks;
+    private List<Project> projects;
 
     public Taskmanager() {
         this.tasks = new ArrayList<>();
+        this.projects = new ArrayList<>();
     }
 
-    public Task createTask(String aufgabe, String beschreibung, Priority priority, LocalDate datum, Status status) {
-        Task task = new Task(aufgabe, beschreibung, priority, datum, status);
+    public Task createTask(String aufgabe, String beschreibung, Priority priority, LocalDate datum, Status status, Project project) {
+        Task task = new Task(aufgabe, beschreibung, priority, datum, status, project);
         tasks.add(task);
         System.out.println("Aufgabe erstellt: " + task.getAufgabe()); // Debug-Ausgabe
         return task;
@@ -48,5 +50,19 @@ public class Taskmanager {
             }
         }
         return gefundeneAufgaben;
+    }
+
+    public Project createProject(String name) {
+        Project project = new Project(name);
+        projects.add(project);
+        return project;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void deleteProject(Project project) {
+        projects.remove(project);
     }
 }

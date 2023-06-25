@@ -8,14 +8,15 @@ public class Task {
     private Priority priority;
     private LocalDate datum;
     private Status status;
+    private Project project;
 
-    
-    public Task(String aufgabe, String beschreibung, Priority priority, LocalDate datum, Status status) {
+    public Task(String aufgabe, String beschreibung, Priority priority, LocalDate datum, Status status, Project project) {
         this.aufgabe = aufgabe;
         this.beschreibung = beschreibung;
         this.priority = priority;
         this.status = status;
         this.datum = datum;
+        this.project = project;
     }
 
     
@@ -59,6 +60,14 @@ public class Task {
         this.status = status;
     }
 
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
     @Override
     public String toString() {
         return "Task{" +
@@ -67,6 +76,7 @@ public class Task {
                 ", Priority=" + priority +
                 ", Status=" + status +
                 ", Erstelldatum=" + datum +
+                ", Project=" + project.getProjectName() +
                 '}';
-    }    
+    }
 }

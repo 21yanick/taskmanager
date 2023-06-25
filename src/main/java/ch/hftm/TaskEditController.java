@@ -26,6 +26,8 @@ public class TaskEditController {
     private Button abbrechenButton;
     @FXML
     private Button löschenButton;
+    @FXML
+    private ComboBox<Project> projektFeld;
 
     private Taskmanager taskmanager;
     private Task task;
@@ -42,6 +44,7 @@ public class TaskEditController {
     private void initialize() {
         priorityFeld.setItems(FXCollections.observableArrayList(Priority.values()));
         statusFeld.setItems(FXCollections.observableArrayList(Status.values()));
+        projektFeld.setItems(FXCollections.observableArrayList(taskmanager.getProjects()));
 
         speichernButton.setOnAction(event -> saveTask());
         abbrechenButton.setOnAction(event -> cancel());
@@ -56,12 +59,15 @@ public class TaskEditController {
             datumFeld.setValue((task.getDatum()));
             priorityFeld.setValue(task.getPriority());
             statusFeld.setValue(task.getStatus());
+            projektFeld.setValue(task.getProject());
         } else {
             aufgabenFeld.setText("");
             beschreibungFeld.setText("");
             datumFeld.setValue(null);
             priorityFeld.setValue(null);
             statusFeld.setValue(null);
+            projektFeld.setValue(null);
+
         }
     }
 
@@ -72,11 +78,12 @@ public class TaskEditController {
         LocalDate datum = datumFeld.getValue();
         Priority priority = priorityFeld.getValue();
         Status status = statusFeld.getValue();
+        Project project = projektFeld.getValue();
 
         if (task == null) {
-            Task newTask = taskmanager.createTask(aufgabe, beschreibung, priority, datum, status);
+            Task newTask = taskmanager.createTask(aufgabe, beschreibung, priority, datum, status, project);
         } else {
-            Task updatedTask = new Task(aufgabe, beschreibung, priority, datum, status);
+            Task updatedTask = new Task(aufgabe, beschreibung, priority, datum, status, project);
             taskmanager.updateTask(task, updatedTask);
         }
 
@@ -103,6 +110,34 @@ public class TaskEditController {
                 Stage stage = (Stage) löschenButton.getScene().getWindow();
                 stage.close();
             }
+        }
+    }
+
+    @FXML
+    public void createProject() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Neues Projekt");
+        dialog.setHeaderText("Gib den Namen des neuen Projekts ein:");
+        dialog.setContentText("Name:");
+
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            taskmanager.createProject(result.get());
+            projektFeld.setItems(FXCollections.observableArrayList(taskmanager.getProjects()));
+        }
+    }
+
+    @FXML
+    public void deleteProject() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Projekt löschen");
+        alert.setHeaderText("Bist du sicher, dass du das Projekt löschen möchtest?");
+        alert.setContentText("Projekt: " + projektFeld.getValue().getProjectName());
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            taskmanager.deleteProject(projektFeld.getValue());
+            projektFeld.setItems(FXCollections.observableArrayList(taskmanager.getProjects()));
         }
     }
 
