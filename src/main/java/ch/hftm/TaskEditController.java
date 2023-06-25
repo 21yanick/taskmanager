@@ -81,7 +81,7 @@ public class TaskEditController {
         Project project = projektFeld.getValue();
 
         if (task == null) {
-            Task newTask = taskmanager.createTask(aufgabe, beschreibung, priority, datum, status, project);
+            taskmanager.createTask(aufgabe, beschreibung, priority, datum, status, project);
         } else {
             Task updatedTask = new Task(aufgabe, beschreibung, priority, datum, status, project);
             taskmanager.updateTask(task, updatedTask);
